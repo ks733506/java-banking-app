@@ -1,140 +1,211 @@
 # Java Banking App
 
-A robust and feature-rich banking application built with Java, providing essential banking operations and account management functionality.
+A feature-rich banking application built with Java that demonstrates object-oriented programming principles including interfaces, inheritance, and encapsulation. The application provides comprehensive account management with support for multiple account types (Checking and Savings).
 
 ## Features
 
-- **Account Management**: Create, view, and manage banking accounts
-- **Transactions**: Deposit and withdrawal operations
-- **Balance Inquiry**: Real-time account balance checking
-- **Transaction History**: View detailed transaction logs
-- **Secure Operations**: Built-in validation and error handling
-
-## Prerequisites
-
-- Java 8 or higher
-- Maven (for dependency management)
-- Git
-
-## Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/ks733506/java-banking-app.git
-cd java-banking-app
-```
-
-2. Build the project:
-```bash
-mvn clean build
-```
-
-3. Run the application:
-```bash
-mvn exec:java -Dexec.mainClass="com.banking.Main"
-```
+- **Multiple Account Types**: Support for Checking and Savings accounts with different characteristics
+- **Account Management**: Create and manage customer banking accounts
+- **Deposit & Withdrawal**: Perform transactions on accounts
+- **Balance Inquiry**: Check real-time account balance
+- **GUI Interface**: User-friendly graphical interface for account operations
+- **Command-Line Interface**: Alternative CLI for account management
+- **Object-Oriented Design**: Clean architecture using interfaces and inheritance
 
 ## Project Structure
 
 ```
 java-banking-app/
 ├── src/
-│   ├── main/
-│   │   └── java/
-│   │       └── com/banking/
-│   │           ├── Account.java
-│   │           ├── Bank.java
-│   │           ├── Transaction.java
-│   │           └── Main.java
-│   └── test/
-│       └── java/
-│           └── com/banking/
-├── pom.xml
-└── README.md
+│   ├── module-info.java            # Java module configuration
+│   └── courseProject/              # Main package
+│       ├── Account.java            # Abstract base class for accounts
+│       ├── AccountInterface.java    # Account contract interface
+│       ├── CheckingAccount.java     # Checking account implementation
+│       ├── SavingsAccount.java      # Savings account implementation
+│       ├── Customer.java            # Customer information class
+│       ├── DataEntry.java           # User input utilities
+│       ├── BankAcctApp.java         # Command-line application
+│       ├── BankAccountGUI.java      # GUI implementation
+│       └── BankAccountGUIApp.java   # GUI entry point
+└── bin/                            # Compiled class files
 ```
 
-## Usage
+## Prerequisites
 
-### Basic Example
+- Java Development Kit (JDK) 8 or higher
+- Eclipse IDE (recommended) or any Java compiler
 
-```java
-// Create a banking instance
-Bank bank = new Bank();
+## Installation & Setup
 
-// Create an account
-Account account = bank.createAccount("John Doe", "123456789");
+### Using Eclipse IDE
 
-// Perform transactions
-account.deposit(1000);
-account.withdraw(200);
+1. Import the project into Eclipse as an existing project
+2. The project will automatically compile
+3. Run as Java Application (select main class when prompted)
 
-// Check balance
-System.out.println("Balance: " + account.getBalance());
+### Using Command Line
+
+**Compilation:**
+```bash
+javac -d bin src/courseProject/*.java src/module-info.java
+```
+
+**Running the CLI Application:**
+```bash
+java -cp bin courseProject.BankAcctApp
+```
+
+**Running the GUI Application:**
+```bash
+java -cp bin courseProject.BankAccountGUIApp
 ```
 
 ## Core Classes
 
-- **Account**: Represents a bank account with balance and transaction history
-- **Bank**: Manages multiple accounts and banking operations
-- **Transaction**: Represents individual transactions (deposits/withdrawals)
-- **Main**: Entry point for the application
+### Account (Abstract Base Class)
+- Represents a generic bank account with common properties
+- Implements `AccountInterface`
+- Methods:
+  - `getAccountNumber()` - Returns account number
+  - `getBalance()` - Returns current balance
+  - `getCustomer()` - Returns associated customer
+  - `deposit(double amount)` - Add funds to account
+  - `withdraw(double amount)` - Remove funds from account
 
-## API Documentation
+### CheckingAccount
+- Extends `Account` for checking account functionality
+- Typically has overdraft protection
+- May include check writing capabilities
 
-### Account Class
-- `deposit(double amount)`: Add funds to the account
-- `withdraw(double amount)`: Remove funds from the account
-- `getBalance()`: Retrieve current account balance
-- `getTransactionHistory()`: View all transactions
+### SavingsAccount
+- Extends `Account` for savings account functionality
+- May include interest calculation
+- Typically has withdrawal restrictions
 
-### Bank Class
-- `createAccount(String name, String accountNumber)`: Create a new account
-- `getAccount(String accountNumber)`: Retrieve an existing account
-- `deleteAccount(String accountNumber)`: Remove an account
+### Customer
+- Represents a customer entity
+- Stores customer information (name, ID, contact details)
+- Manages associated accounts
+
+### AccountInterface
+- Defines the contract for all account types
+- Ensures consistent behavior across different account implementations
+
+### DataEntry
+- Utility class for user input validation
+- Handles numeric and string input with error checking
+
+## Usage Examples
+
+### Command-Line Application (BankAcctApp)
+
+The CLI application provides an interactive menu for:
+- Creating new customers
+- Opening accounts (Checking or Savings)
+- Depositing funds
+- Withdrawing funds
+- Viewing account balances
+- Managing multiple accounts
+
+### GUI Application (BankAccountGUI)
+
+The GUI provides a user-friendly interface with:
+- Forms for account creation
+- Transaction input fields
+- Real-time balance updates
+- Account selection dropdown
+- Error message display
+- Professional layout
+
+## Application Workflow
+
+1. **Customer Creation**: Enter customer information
+2. **Account Opening**: Create Checking or Savings account
+3. **Transaction Entry**: Perform deposits/withdrawals
+4. **Account Management**: View balances and account details
+5. **Reporting**: Generate account summaries
+
+## Key Design Patterns
+
+- **Inheritance**: Account types extend base Account class
+- **Interface Implementation**: AccountInterface defines standard operations
+- **Encapsulation**: Private fields with public accessor methods
+- **Polymorphism**: Different account types with specialized behaviors
+
+## Method Reference
+
+### Account Class Methods
+- `deposit(double amount)` - Add funds; typically validates positive amount
+- `withdraw(double amount)` - Remove funds; checks for sufficient balance
+- `getBalance()` - Returns current account balance
+- `getAccountNumber()` - Returns unique account identifier
+- `getCustomer()` - Returns associated Customer object
+
+### Customer Class Methods
+- `getCustomerID()` - Returns customer ID
+- `getCustomerName()` - Returns customer name
+- `addAccount(Account account)` - Associates account with customer
+- `getAccounts()` - Returns list of customer's accounts
+
+## Compilation & Execution
+
+### One-Step Compilation and Run
+
+```bash
+# Compile
+javac -d bin src/courseProject/*.java src/module-info.java
+
+# Run CLI
+java -cp bin courseProject.BankAcctApp
+
+# Run GUI
+java -cp bin courseProject.BankAccountGUIApp
+```
+
+## Error Handling
+
+- Validates account numbers are unique
+- Prevents negative deposits
+- Checks for sufficient funds before withdrawal
+- Validates customer information input
+- GUI provides user-friendly error messages
+
+## Learning Objectives
+
+This project demonstrates:
+- Abstract classes and inheritance hierarchy
+- Interface-based design
+- Encapsulation principles
+- GUI development with Java Swing
+- Data validation and error handling
+- Object-oriented programming best practices
+- Multi-window GUI applications
 
 ## Testing
 
-Run the test suite with:
-```bash
-mvn test
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+The application can be tested by:
+1. Creating multiple customers
+2. Opening different account types for each customer
+3. Performing various transactions
+4. Verifying balance updates
+5. Testing invalid input scenarios
 
 ## Author
 
-**ks733506** - [GitHub Profile](https://github.com/ks733506)
+Created by: ks733506
 
-## Support
+## License
 
-For support, please open an issue in the [GitHub Issues](https://github.com/ks733506/java-banking-app/issues) section.
+This project is open source and available for educational purposes.
 
-## Roadmap
+## Additional Notes
 
-- [ ] Database integration
-- [ ] REST API endpoints
-- [ ] User authentication
-- [ ] Multi-currency support
-- [ ] Interest calculation
-- [ ] Loan management
-- [ ] Mobile app integration
-
-## Changelog
-
-### Version 1.0.0
-- Initial release
-- Basic account operations
-- Transaction management
+- The module system (`module-info.java`) requires JDK 9+
+- Account numbers are typically generated automatically
+- All monetary values use double precision
+- Both GUI and CLI interfaces manage the same underlying data structures
+- The application is single-user (in-memory data storage)
 
 ---
 
