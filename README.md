@@ -76,7 +76,6 @@ java -cp bin courseProject.BankAccountGUIApp
 ### CheckingAccount
 - Extends `Account` for checking account functionality
 - Typically has overdraft protection
-- May include check writing capabilities
 
 ### SavingsAccount
 - Extends `Account` for savings account functionality
@@ -202,7 +201,6 @@ This project is open source and available for educational purposes.
 ## Additional Notes
 
 - The module system (`module-info.java`) requires JDK 9+
-- Account numbers are typically generated automatically
 - All monetary values use double precision
 - Both GUI and CLI interfaces manage the same underlying data structures
 - The application is single-user (in-memory data storage)
